@@ -1,0 +1,6 @@
+require('./01-helloTs.ts')
+require('./02-class')
+require('./03-interface')
+require('./04-private-public')
+require('./05-泛型')
+console.log('index ts~~')
