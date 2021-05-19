@@ -429,7 +429,7 @@ interface Inter1 {
   length: number
 }
 
-// 泛型T必须符合接口Inter1
+// 泛型T必须符合接口Inter1, T 类型必须有length属性
 function func3<T extends Inter1> (a: T) : number {
   console.log(a)
   return a.length
@@ -449,3 +449,19 @@ class Ac2<T> {
 const ac2 = new Ac2<string>('nameeeee')
 ```
 
+
+### 文件声明 declare
+
+一般用于使用第三方库时，显示提示信息。声明文件放置到单独的文件 xxx.d.ts 里，ts会自动解析 d.ts 文件
+
+```javascript
+import jQuery from 'jquery'
+
+// 声明
+declare const jQuery: (selector: string) => any
+// 推荐使用第三方声明文件，如jquery声明文件，使用 @types/jquery 包
+// https://www.typescriptlang.org/dt/search
+
+// 使用
+jQuery('xxx')
+```

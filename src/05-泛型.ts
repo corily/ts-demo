@@ -43,3 +43,10 @@ class Ac2<T> {
 }
 
 const ac2 = new Ac2<string>('nameeeee')
+
+function func4<T extends Inter1> (a: T) : number {
+  console.log(a)
+  return a.length
+}
+
+console.log( func4('1222') )
