@@ -27,6 +27,8 @@
  |  array  | [1,2,3]  |  js数字  |
  |  tuple  | [1,2,3]  |  元组，ts新增类型，固定长度数组  |
  |  enum  | enum{A,B}  |  枚举，ts新增类型  |
+ |  undefined  | u:undefined  |  undefined  |
+ |  null  | n:null  |  null  |
 
  #### 类型声明
 
@@ -163,6 +165,27 @@ ts中用小写字母开头的类型代表字面量, 大写的是用来表示通�
  let asA: myType
  let asB: myType
 
+ ```
+
+
+ #### 函数重载
+
+ ```javascript
+ // 函数重载声明
+ function add(x: string, y: string): string
+ function add(x: number, y: number): number
+ 
+ // 函数声明
+ function add(x: string | number, y: string | number): string | number {
+   if(typeof x === 'string' && y === 'string') 
+     return x + y
+   else if (typeof x === 'number' && y === 'number')
+     return x + y
+ }
+ 
+ add('aa', 'bb')
+ add(10, 20)
+ add('aa', 20) // 如果没有函数重载声明，则ts不会提示错误
  ```
 
 
@@ -373,5 +396,56 @@ class MyClass implements myInter {
     console.log('implements  inter say~~')
   }
 }
+```
+
+
+### 泛型
+
+```javascript
+/* 
+  在定义函数 或 类时，类型不明确就可以使用泛型
+    泛型可以同时指定多个
+*/
+
+function func1 <T> (a: T) : T {
+  console.log(a)
+  return a
+}
+
+// 调用具有泛型的函数
+func1(66) // 不指定泛型时，ts可以自动对类型进行推断
+func1<string>('05-泛型.ts') // 指定泛型
+
+
+function func2 <T, K> (a: T, b:K) : T {
+  console.log(a, b)
+  return a
+}
+
+func2<string, number>('aaa', 88)
+
+
+interface Inter1 {
+  length: number
+}
+
+// 泛型T必须符合接口Inter1
+function func3<T extends Inter1> (a: T) : number {
+  console.log(a)
+  return a.length
+}
+
+console.log( func3('1222') )
+
+
+
+class Ac2<T> {
+  name: T
+  constructor(name: T) {
+    this.name = name
+  }
+}
+
+const ac2 = new Ac2<string>('nameeeee')
 ```
 
